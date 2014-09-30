@@ -4,6 +4,7 @@ import json
 import urllib2
 import urllib
 
+save_dir = "T:\\slvp\\"
 api_url = 'https://api.vk.com/method/'
 group_id = '-60432911'
 album_id = 'wall'
@@ -36,9 +37,11 @@ for offset in range(0, 15000, 1000):
             photo_url = photo['src_big']
         else:
             continue
-        path = "T:\\slvp\\wall_" + str(i) + '.jpg'
+        path = save_dir + "wall_" + str(i) + '.jpg'
         try:
             urllib.urlretrieve(photo_url, path)
             print path
-        except():
+        except urllib.ContentTooShortError:
             print "Oh"
+        except IOError:
+            print "shit"
